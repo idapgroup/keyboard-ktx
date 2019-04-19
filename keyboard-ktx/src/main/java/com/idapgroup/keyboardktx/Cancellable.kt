@@ -5,11 +5,18 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
 
+/**
+ * Something, usually a task, that can be cancelled. Cancellation is performed by the cancel method.
+ * Additional method is provided to determine if the task was cancelled.
+ */
 interface Cancellable {
     val isCancelled: Boolean
     fun cancel()
 }
 
+/**
+ * Take care of a single cancellation of [call], following the [cancel] invocation will be ignored
+ */
 class SafeCancellable(
     call: () -> Unit
 ): Cancellable {
@@ -26,6 +33,11 @@ class SafeCancellable(
     }
 }
 
+/**
+ * Cancels [this] [Cancellable] when  lifecycleOwner] emits [cancelEvent]
+ * @param lifecycleOwner lifecycle events emitter
+ * @param cancelEvent by which [this] [Cancellable] will be cancelled
+ */
 fun Cancellable.cancelWhen(
     lifecycleOwner: LifecycleOwner,
     cancelEvent: Lifecycle.Event
@@ -58,6 +70,10 @@ fun Cancellable.cancelWhen(
     lifecycleOwner.lifecycle.addObserver(lifecycleObserver)
 }
 
-fun Cancellable.cancelWhenDestroyed(lifecycleOwner: LifecycleOwner){
+/**
+ * Cancels [this] [Cancellable] when  [lifecycleOwner] emits [Lifecycle.Event.ON_DESTROY] event
+ * @param lifecycleOwner lifecycle events emitter
+ */
+fun Cancellable.cancelWhenDestroyed(lifecycleOwner: LifecycleOwner) {
     cancelWhen(lifecycleOwner, Lifecycle.Event.ON_DESTROY)
 }

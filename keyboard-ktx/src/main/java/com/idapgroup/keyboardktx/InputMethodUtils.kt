@@ -55,7 +55,7 @@ internal val Context.inputMethodWindowVisibleHeight: Int?
     }
 
 @Throws(NoSuchMethodException::class, InvocationTargetException::class, IllegalAccessException::class)
-internal fun <T> callMethod(target: Any, methodName: String): T {
+private fun <T> callMethod(target: Any, methodName: String): T {
     val method = target.javaClass.getDeclaredMethod(methodName)
     method.isAccessible = true
     @Suppress("UNCHECKED_CAST")
