@@ -13,8 +13,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        changeStateButton.text
-
         changeStateButton.setOnClickListener {
             if(isKeyboardShown) hideKeyboard() else editText.showKeyboard()
 
