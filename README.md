@@ -34,9 +34,13 @@ class ExampleActivity  :  AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         changeKeyboardStateButton.setOnClickListener {
-            if(isKeyboardShown) hideKeyboard() else editText.showKeyboard()
+            if(isKeyboardShown) {
+                hideKeyboard() 
+            } else {
+                editText.showKeyboard()
+            }
         }
-        onKeyboardShowChanged { shown, height ->
+        onKeyboardShowChanged { shown: Boolean, height: Int ->
             // your use of shown and height
         }
     }
