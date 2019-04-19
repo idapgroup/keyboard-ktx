@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Keyboard</string>
+    <string name="keyboard_height">Keyboard height: %d</string>
+    <string name="keyboard_state">Keyboard state: %s</string>
+</resources>
